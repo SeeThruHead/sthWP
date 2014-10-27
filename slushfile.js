@@ -45,8 +45,14 @@ gulp.task('default', ['getWordPress'], function (done) {
         name: 'appName',
         message: 'What is the name of your project?',
         default: defaults.appName
+    },
+    {
+        type: 'confirm',
+        name: 'useHacker',
+        message: 'Would you like to use hacker You starter theme?',
     }, {
-        name: 'appDescription',
+
+        name: 'appDescription',gu
         message: 'What is the description?'
     }, {
         name: 'appVersion',
