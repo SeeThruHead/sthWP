@@ -51,8 +51,7 @@ gulp.task('default', ['getWordPress'], function (done) {
         name: 'useHacker',
         message: 'Would you like to use hacker You starter theme?',
     }, {
-
-        name: 'appDescription',gu
+        name: 'appDescription',
         message: 'What is the description?'
     }, {
         name: 'appVersion',
