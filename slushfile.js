@@ -38,7 +38,7 @@ var defaults = (function () {
     };
 })();
 gulp.task('getWordPress', function(cb) {
-    return gulp.src('').pipe(shell(['wget http://wordpress.org/latest.tar.gz && mkdir src && tar -xzvf latest.tar.gz --strip=1 -C src/ && rm latest.tar.gz']));
+    return gulp.src('').pipe(shell(['wget http://wordpress.org/latest.tar.gz && mkdir src && tar -xzf latest.tar.gz --strip=1 -C src/ && rm latest.tar.gz']));
 });
 gulp.task('default', ['getWordPress'], function (done) {
     var prompts = [{
@@ -79,8 +79,13 @@ gulp.task('default', ['getWordPress'], function (done) {
             if (!answers.moveon) {
                 return done();
             }
+            var globs = [__dirname + '/templates/**'];
+            if (!answers.useHacker) {
+                console.log(answers.useHacker);
+                globs.push('!' + __dirname + '/templates/src/wp-content/themes/theme-hackeryou{,/**}');
+            }
             answers.appNameSlug = _.slugify(answers.appName);
-            gulp.src(__dirname + '/templates/**')
+            gulp.src(globs)
                 .pipe(template(answers))
                 .pipe(rename(function (file) {
                     if (file.basename[0] === '_') {
